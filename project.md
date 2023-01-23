@@ -12,7 +12,7 @@
 
 **_Description_**
 
-This project is a memory card game. It is build on 4x4 grid cards and has 3 different themes to start. A player can test her/his memory in this game. Also, the score board counts the wins, the timer tells how long the game is. Then, restart button refreshes the game.
+This project is a memory card game. It is build on 4x4 grid cards and has 2 different themes (Sesamme Street and Pokemon characters) to start. A player can test her/his memory in this game. Also, the score board counts the wins, the timer tells how long the game is. Then, restart button refreshes the game.
 
 ---
 
@@ -38,7 +38,8 @@ The Memory Card Game has built on this outline orderly:
 - Creating basic CSS style properties.
 - Building the codes in Javascript
   - Declaring variables
-  - Function for game rules
+  - Connecting 2 HTML pages
+  - Functions for game rules
   - Adding event listeners
 - Adding some stylistic and improving features.
 
