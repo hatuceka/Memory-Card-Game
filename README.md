@@ -12,7 +12,7 @@
 
 **_Description_**
 
-This project is a memory card game. It is build on 4x4 grid cards and has 2 different themes (Sesamme Street and Pokemon characters) to start. A player can test her/his memory in this game. Also, the score board counts the wins, the timer tells how long the game is. Then, restart button refreshes the game.
+This project is a memory card game. It is build on 4x4 grid cards and has 2 different themes (Sesame Street and Pokemon characters) to start. A player can test her/his memory in this game. Also, the score board counts the wins, the timer tells how long the game is. Then, restart button refreshes the game.
 
 ---
 

@@ -76,4 +76,17 @@ h1 {
   cursor: pointer;
   background-color:  rgb(253, 237, 148);
   color: olive;
+  border: 10px solid olive;
+}
+#play {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  cursor: pointer;
+  background-color:  rgb(253, 237, 148);
+  color: olive;
+  border: 10px solid olive;
+  border-radius: 10px;
+  padding: 10px;
 }
