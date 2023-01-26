@@ -8,13 +8,9 @@ const winnerMessage = document.getElementById('winner-message')
 
 let score = document.querySelector('.score')
 let duration = document.querySelector('.duration')
-let moves = document.querySelector('.moves')
 
 let startGame = false
 let gameEnd = false
-let winningMessage = null
-let closedCard = true
-let openCard = false
 
 const sesameList = [
   {
@@ -89,6 +85,20 @@ let shuffledCards = []
 const sesameTheme = document.querySelector('.sesame')
 const pokemonTheme = document.querySelector('.pokemon')
 
+const winningConditions = () => {
+  let matchedSquares = 0
+  squares.forEach((square) => {
+    if (square.classList.contains('matched')) {
+      matchedSquares++
+    }
+  })
+  if (matchedSquares === squares.length) {
+    gameEnd = true
+    winnerMessage.innerText = `Congratulations!`
+  }
+}
+
+let move = 0
 const start = () => {
   shuffledCards = []
   for (let i = 0; i < 2; i++) {
@@ -96,6 +106,7 @@ const start = () => {
       shuffledCards.push(item.url)
     })
   }
+  let clicks = []
 
   const shuffledArray = shuffledCards.sort((a, b) => 0.5 - Math.random())
   squares.forEach((square, index) => {
@@ -103,9 +114,45 @@ const start = () => {
       square.style.backgroundImage = `url(${shuffledArray[index]})`
       square.style.backgroundSize = 'cover'
       square.innerText = ''
+
+      move++
+      document.querySelector('.moves').innerText = `Moves: ${move}`
+
+      clicks.push(square)
+      if (clicks.length === 2) {
+        if (
+          clicks[0].style.backgroundImage === clicks[1].style.backgroundImage
+        ) {
+          clicks[0].disabled = true
+          clicks[1].disabled = true
+          clicks[0].classList.add('matched')
+          clicks[1].classList.add('matched')
+          clicks = []
+          console.log('matched')
+          winningConditions()
+        } else {
+          const flipCard = () => {
+            squares.forEach((square) => {
+              console.log(square)
+              if (square.classList.contains('matched')) {
+                return
+              } else {
+                square.style.backgroundImage = null
+                square.innerText = '?'
+              }
+            })
+
+            clicks = []
+          }
+
+          setTimeout(() => flipCard(), 1000)
+          console.log('not a match')
+        }
+      }
     })
   })
 }
+
 sesameTheme.addEventListener('click', () => {
   userChoice = sesameList
   sesameTheme.disabled = true
@@ -119,38 +166,20 @@ pokemonTheme.addEventListener('click', () => {
   start()
 })
 
-//squares.forEach((square) => {
-//square.addEventListener('click', () => {
-//let shuffledCards = []
-//for (let i = 0; i < 2; i++) {
-//pokemonList.forEach((pokemonItem, index) => {
-//shuffledCards.push(pokemonItem[index])
-//})
-//}
-//})
-//})
-//let sesameList = document.querySelectorAll('.square').style.backgroundImage
-//sesameTheme.addEventListener('click', () => {
-//play.addEventListener('click', () => {
-//document.querySelector('.square').style.backgroundImage = sesameList[0].url
-//document.querySelector('.square').style.backgroundImage = sesameList[1].url
-//document.querySelector('.square').style.backgroundImage = sesameList[2].url
-//document.querySelector('.square').style.backgroundImage = sesameList[3].url
-//document.querySelector('.square').style.backgroundImage = sesameList[4].url
-//document.querySelector('.square').style.backgroundImage = sesameList[5].url
-//document.querySelector('.square').style.backgroundImage = sesameList[6].url
-//document.querySelector('.square').style.backgroundImage = sesameList[7].url
+restartButton.addEventListener('click', () => {
+  location.reload()
+})
 
-//document.querySelector('.square').style.backgroundImage = pokemonList[0].url
-//document.querySelector('.square').style.backgroundImage = pokemonList[1].url
-//document.querySelector('.square').style.backgroundImage = pokemonList[2].url
-//document.querySelector('.square').style.backgroundImage = pokemonList[3].url
-//document.querySelector('.square').style.backgroundImage = pokemonList[4].url
-//document.querySelector('.square').style.backgroundImage = pokemonList[5].url
-//document.querySelector('.square').style.backgroundImage = pokemonList[6].url
-//document.querySelector('.square').style.backgroundImage = pokemonList[7].url
-
-//Adding some event listeners
+// let matchCards = () => {
+//   if (
+//     choice1(squares.backgroundImage) === choice2(squares.backgroundImage)
+//   ) {
+//     openCard = true
+//   } else {
+//     closedCard = true
+//   }
+// }
+//matchCards()
 
 //winningMessage.innerText = `Congratulations!`
 //score = score + 1
