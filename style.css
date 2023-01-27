@@ -1,10 +1,16 @@
 
 body {
   background-color: rgb(170, 170, 84);
+  
+}
+.empty {
+  margin: 0 auto;
+  height: 400px;
+  width: 400px;
 }
 
-
 h1 {
+  height: 200px;
   text-align: center;
   font-size: 100px;
   color: olive;
@@ -16,36 +22,45 @@ font-family: 'Schoolbell', cursive;
   height: 400px;
   width: 400px;
   display: grid;
-  gap: 10px 10px;
+  gap: 100px 100px;
+  place-items: center;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   background-color: rgb(170, 170, 84);
 }
 .sesame {
+ 
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 10px solid rgb(253, 237, 148);
+
   height: 200px;
   width: 200px;
   cursor: pointer;
-}
-.sesame img{
-  height: 200px;
-  width: 200px;
-}
-.pokemon img {
-  height: 200px;
-  width: 200px;
 }
 .pokemon {
+  
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 10px solid rgb(253, 237, 148);
+  
   height: 200px;
   width: 200px;
   cursor: pointer;
+}
+.sesame img{ 
+  border: 30px solid rgb(253, 237, 148);
+  margin: 20 auto;
+  height: 200px;
+  width: 200px;
+  border-radius: 30px;
+}
+.pokemon img {
+  margin: 20 auto;
+  height: 200px;
+  width: 200px;
+  border: 30px solid rgb(253, 237, 148);
+  border-radius: 30px;
 }
 
 
@@ -60,13 +75,14 @@ font-family: 'Schoolbell', cursive;
 
 .container {
   margin: 0 auto;
-  width: 600px;
-  height: 600px;
+  width: 700px;
+  height: 800px;
   background-color: rgb(170, 170, 84);
   display: grid;
-  gap: 10px 10px;
+  border-radius: 10px;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  
 }
 
 .square {
@@ -79,11 +95,12 @@ font-family: 'Schoolbell', cursive;
   font-size: 100px;
   font-family: 'Sevillana';
   color: olive;
-  
+  border: 10px solid olive;
+  border-radius: 10px;
 }
 
 #restart {
-  margin: auto;
+  margin: 20px auto;
   display: flex;
   justify-content: center;
   width: 150px;
@@ -99,9 +116,12 @@ font-family: 'Schoolbell', cursive;
   
 }
 #play {
-  margin: 0 auto;
+  margin: 50px auto;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 200px;
   font-size: 50px;
   font-family: 'Schoolbell', cursive;
   cursor: pointer;
@@ -112,7 +132,7 @@ font-family: 'Schoolbell', cursive;
   padding: 10px;
 }
 .stuff {
-  margin-top: 30px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-around;
   font-family: 'Schoolbell', cursive;
@@ -128,4 +148,23 @@ font-family: 'Schoolbell', cursive;
   border: 3px solid olive;
   border-radius: 15px;
   padding: 10px;
+}
+.rules {
+  margin: 0 auto;
+  font-family: 'Schoolbell', cursive;
+  font-size: 40px;
+  color: olive;
+  background-color:  rgb(253, 237, 148);
+  border: 10px solid olive;
+  border-radius: 10px;
+}
+
+.frame {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 700px;
+ 
 }

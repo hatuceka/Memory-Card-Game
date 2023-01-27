@@ -107,6 +107,7 @@ const squareClick = (event) => {
 
   event.target.style.backgroundSize = 'cover'
   event.target.innerText = ''
+
   move++
   document.querySelector('.moves').innerText = `Moves: ${move}`
   clickSound.play()
