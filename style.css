@@ -2,11 +2,14 @@
 body {
   background-color: rgb(170, 170, 84);
 }
+
+
 h1 {
   text-align: center;
-  height: 120px;
-  font-size: 50px;
-  color: white;
+  font-size: 100px;
+  color: olive;
+  font-weight: bold;
+font-family: 'Schoolbell', cursive;
 }
 .themes {
   margin: 0 auto;
@@ -17,7 +20,6 @@ h1 {
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   background-color: rgb(170, 170, 84);
- 
 }
 .sesame {
   display: flex;
@@ -46,6 +48,16 @@ h1 {
   cursor: pointer;
 }
 
+
+.blink {
+  animation: blink 1s linear infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 .container {
   margin: 0 auto;
   width: 600px;
@@ -69,33 +81,51 @@ h1 {
   color: olive;
   
 }
-.stuff {
-  margin: 0 auto;
-  height: 100px;
-  width: 600px;
-  display: grid;
-  gap: 10px 10px;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
-  background-color: rgb(170, 170, 84);
-  font-size: 20px;
-  color:  rgb(253, 237, 148);
-}
+
 #restart {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  height: 75px;
+  font-size: 40px;
   cursor: pointer;
   background-color:  rgb(253, 237, 148);
   color: olive;
   border: 10px solid olive;
+  font-family: 'Schoolbell', cursive;
+  border-radius: 15px;
+  padding: 0;
+  
 }
 #play {
   margin: 0 auto;
   display: flex;
   justify-content: center;
   font-size: 50px;
+  font-family: 'Schoolbell', cursive;
   cursor: pointer;
   background-color:  rgb(253, 237, 148);
   color: olive;
   border: 10px solid olive;
   border-radius: 10px;
+  padding: 10px;
+}
+.stuff {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  font-family: 'Schoolbell', cursive;
+  font-size: 40px;
+  color:  rgb(253, 237, 148);
+}
+.duration {
+  border: 3px solid olive;
+  border-radius: 15px;
+  padding: 10px;
+}
+.moves {
+  border: 3px solid olive;
+  border-radius: 15px;
   padding: 10px;
 }

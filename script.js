@@ -1,13 +1,9 @@
-const play = document.getElementById('play button')
+const play = document.getElementById('play')
 
 const container = document.querySelector('.container')
 const squares = document.querySelectorAll('.square')
 
-const restartButton = document.getElementById('restart')
 const winnerMessage = document.getElementById('winner-message')
-
-let score = document.querySelector('.score')
-let duration = document.querySelector('.duration')
 
 let startGame = false
 let gameEnd = false
@@ -82,107 +78,131 @@ const pokemonList = [
 ]
 let userChoice = []
 let shuffledCards = []
-const sesameTheme = document.querySelector('.sesame')
-const pokemonTheme = document.querySelector('.pokemon')
-
-const winningConditions = () => {
-  let matchedSquares = 0
-  squares.forEach((square) => {
-    if (square.classList.contains('matched')) {
-      matchedSquares++
-    }
-  })
-  if (matchedSquares === squares.length) {
-    gameEnd = true
-    winnerMessage.innerText = `Congratulations!`
-  }
-}
 
 let move = 0
+let elapsedTime = 0
+let interval
+let gameSound = new Audio('./Splashing Around - The Green Orbs.mp3')
+gameSound.loop = true
+gameSound.volume = 0.1
 const start = () => {
-  shuffledCards = []
+  gameSound.play()
+  startTime = Date.now()
+  interval = setInterval(() => {
+    elapsedTime = Date.now() - startTime
+    let minutes = Math.floor(elapsedTime / 60000)
+    let seconds = ((elapsedTime % 60000) / 1000).toFixed(0)
+    document.querySelector('.duration').innerText = `Time: ${minutes}:${
+      seconds < 10 ? '0' : ''
+    }${seconds}`
+  }, 1000)
+}
+
+let clicks = []
+let clickSound = new Audio('./mixkit-arcade-game-jump-coin-216.wav')
+const squareClick = (event) => {
+  let squareId = parseInt(event.target.id)
+
+  event.target.style.backgroundImage = `url(${shuffledArray[squareId]})`
+
+  event.target.style.backgroundSize = 'cover'
+  event.target.innerText = ''
+  move++
+  document.querySelector('.moves').innerText = `Moves: ${move}`
+  clickSound.play()
+  clicks.push(event.target)
+
+  let winningSound = new Audio('./Female Crowd Celebration.mp3')
+  const winningConditions = () => {
+    let matchedSquares = 0
+    squares.forEach((square) => {
+      if (square.classList.contains('matched')) {
+        matchedSquares++
+      }
+    })
+    if (matchedSquares === squares.length) {
+      clearInterval(interval)
+      gameSound.pause()
+      winningSound.play()
+      gameEnd = true
+      winnerMessage.innerText = 'WELL DONE!'
+      winnerMessage.classList.add('blink')
+    }
+  }
+
+  if (clicks.length === 2) {
+    squares.forEach((square, index) => {
+      square.removeEventListener('click', squareClick)
+    })
+    matchedSound = new Audio('./mixkit-positive-interface-beep-221.wav')
+    if (clicks[0].style.backgroundImage === clicks[1].style.backgroundImage) {
+      clicks[0].disabled = true
+      clicks[1].disabled = true
+      clicks[0].classList.add('matched')
+      clicks[1].classList.add('matched')
+      matchedSound.play()
+      clicks = []
+      squares.forEach((square, index) => {
+        square.addEventListener('click', squareClick)
+      })
+      winningConditions()
+      unmatchedSound = new Audio(
+        './mixkit-negative-tone-interface-tap-2569.wav'
+      )
+    } else {
+      unmatchedSound.play()
+      const flipCard = () => {
+        squares.forEach((square) => {
+          console.log(square)
+          if (square.classList.contains('matched')) {
+            return
+          } else {
+            square.style.backgroundImage = null
+            square.innerText = '?'
+            squares.forEach((square, index) => {
+              square.addEventListener('click', squareClick)
+            })
+          }
+        })
+
+        clicks = []
+      }
+
+      setTimeout(() => flipCard(), 1000)
+    }
+  }
+}
+const shuffledArray = shuffledCards.sort((a, b) => 0.5 - Math.random())
+squares.forEach((square, index) => {
+  square.addEventListener('click', squareClick)
+})
+const sesameTheme = document.querySelector('.sesame')
+sesameTheme.addEventListener('click', () => {
+  userChoice = sesameList
+  sesameTheme.disabled = true
+  pokemonTheme.disabled = true
   for (let i = 0; i < 2; i++) {
     userChoice.forEach((item) => {
       shuffledCards.push(item.url)
     })
   }
-  let clicks = []
-
-  const shuffledArray = shuffledCards.sort((a, b) => 0.5 - Math.random())
-  squares.forEach((square, index) => {
-    square.addEventListener('click', () => {
-      square.style.backgroundImage = `url(${shuffledArray[index]})`
-      square.style.backgroundSize = 'cover'
-      square.innerText = ''
-
-      move++
-      document.querySelector('.moves').innerText = `Moves: ${move}`
-
-      clicks.push(square)
-      if (clicks.length === 2) {
-        if (
-          clicks[0].style.backgroundImage === clicks[1].style.backgroundImage
-        ) {
-          clicks[0].disabled = true
-          clicks[1].disabled = true
-          clicks[0].classList.add('matched')
-          clicks[1].classList.add('matched')
-          clicks = []
-          console.log('matched')
-          winningConditions()
-        } else {
-          const flipCard = () => {
-            squares.forEach((square) => {
-              console.log(square)
-              if (square.classList.contains('matched')) {
-                return
-              } else {
-                square.style.backgroundImage = null
-                square.innerText = '?'
-              }
-            })
-
-            clicks = []
-          }
-
-          setTimeout(() => flipCard(), 1000)
-          console.log('not a match')
-        }
-      }
-    })
-  })
-}
-
-sesameTheme.addEventListener('click', () => {
-  userChoice = sesameList
-  sesameTheme.disabled = true
-  pokemonTheme.disabled = true
   start()
 })
+const pokemonTheme = document.querySelector('.pokemon')
 pokemonTheme.addEventListener('click', () => {
   userChoice = pokemonList
   sesameTheme.disabled = true
   pokemonTheme.disabled = true
+  for (let i = 0; i < 2; i++) {
+    userChoice.forEach((item) => {
+      shuffledCards.push(item.url)
+    })
+  }
   start()
 })
-
+const restartButton = document.getElementById('restart')
 restartButton.addEventListener('click', () => {
+  winningSound.pause()
   location.reload()
+  winnerMessage.classList.remove('blink')
 })
-
-// let matchCards = () => {
-//   if (
-//     choice1(squares.backgroundImage) === choice2(squares.backgroundImage)
-//   ) {
-//     openCard = true
-//   } else {
-//     closedCard = true
-//   }
-// }
-//matchCards()
-
-//winningMessage.innerText = `Congratulations!`
-//score = score + 1
-//duration = 20 //will change to a function
-//moves = 20 //will change to a function
-//Should be add gameEnd, score, move, duration
