@@ -1,3 +1,4 @@
+//Global variables
 const winningImage = document.getElementById('h1')
 
 const container = document.querySelector('.container')
@@ -76,6 +77,7 @@ const pokemonList = [
     url: 'https://www.kindpng.com/picc/m/9-96764_pokemon-pikachu-png-photo-pokemon-pikachu-png-transparent.png'
   }
 ]
+//Game logic functions
 let userChoice = []
 let shuffledCards = []
 
@@ -86,6 +88,7 @@ let gameSound = new Audio('./Splashing Around - The Green Orbs.mp3')
 gameSound.loop = true
 gameSound.volume = 0.1
 const start = () => {
+  //Game started. Sounds and tracking time added.
   gameSound.play()
   startTime = Date.now()
   interval = setInterval(() => {
@@ -100,6 +103,7 @@ const start = () => {
 
 let clicks = []
 let clickSound = new Audio('./mixkit-arcade-game-jump-coin-216.wav')
+//Square click functions
 const squareClick = (event) => {
   let squareId = parseInt(event.target.id)
 
@@ -107,13 +111,14 @@ const squareClick = (event) => {
 
   event.target.style.backgroundSize = 'cover'
   event.target.innerText = ''
-
+  //Tracking moves and adding sounds
   move++
   document.querySelector('.moves').innerText = `Moves: ${move}`
   clickSound.play()
   clicks.push(event.target)
 
   let winningSound = new Audio('./Female Crowd Celebration.mp3')
+  //
   const winningConditions = () => {
     let matchedSquares = 0
     squares.forEach((square) => {
@@ -121,6 +126,7 @@ const squareClick = (event) => {
         matchedSquares++
       }
     })
+    //Game end. Winning sounds and images added.
     if (matchedSquares === squares.length) {
       clearInterval(interval)
       gameSound.pause()
@@ -132,13 +138,14 @@ const squareClick = (event) => {
       winnerMessage.classList.add('blink')
     }
   }
-
+  //The conditions for matching the squares with only two clicks.
   if (clicks.length === 2) {
     squares.forEach((square, index) => {
       square.removeEventListener('click', squareClick)
     })
     matchedSound = new Audio('./mixkit-positive-interface-beep-221.wav')
     unmatchedSound = new Audio('./mixkit-negative-tone-interface-tap-2569.wav')
+    //matched squares
     if (clicks[0].style.backgroundImage === clicks[1].style.backgroundImage) {
       clicks[0].disabled = true
       clicks[1].disabled = true
@@ -153,6 +160,7 @@ const squareClick = (event) => {
       unmatchedSound = new Audio(
         './mixkit-negative-tone-interface-tap-2569.wav'
       )
+      //unmatched squares and flipping functions
     } else {
       unmatchedSound.play()
       const flipCard = () => {
@@ -177,7 +185,6 @@ const squareClick = (event) => {
   }
 }
 let shuffledArray
-//const shuffledArray = shuffledCards.sort((a, b) => 0.5 - Math.random())
 squares.forEach((square, index) => {
   square.addEventListener('click', squareClick)
 })
@@ -192,6 +199,7 @@ sesameTheme.addEventListener('click', () => {
       shuffledCards.push(item.url)
     })
   }
+  //shuffling squares for sesame theme
   shuffledArray = shuffledCards.sort((a, b) => 0.5 - Math.random())
   start()
 })
@@ -205,9 +213,11 @@ pokemonTheme.addEventListener('click', () => {
       shuffledCards.push(item.url)
     })
   }
+  //shuffling squares for pokemon theme
   shuffledArray = shuffledCards.sort((a, b) => 0.5 - Math.random())
   start()
 })
+//Event listener for restart
 const restartButton = document.getElementById('restart')
 restartButton.addEventListener('click', () => {
   winningSound.pause()
