@@ -135,6 +135,7 @@ const squareClick = (event) => {
       square.removeEventListener('click', squareClick)
     })
     matchedSound = new Audio('./mixkit-positive-interface-beep-221.wav')
+    unmatchedSound = new Audio('./mixkit-negative-tone-interface-tap-2569.wav')
     if (clicks[0].style.backgroundImage === clicks[1].style.backgroundImage) {
       clicks[0].disabled = true
       clicks[1].disabled = true
@@ -172,7 +173,8 @@ const squareClick = (event) => {
     }
   }
 }
-const shuffledArray = shuffledCards.sort((a, b) => 0.5 - Math.random())
+let shuffledArray
+//const shuffledArray = shuffledCards.sort((a, b) => 0.5 - Math.random())
 squares.forEach((square, index) => {
   square.addEventListener('click', squareClick)
 })
@@ -186,6 +188,7 @@ sesameTheme.addEventListener('click', () => {
       shuffledCards.push(item.url)
     })
   }
+  shuffledArray = shuffledCards.sort((a, b) => 0.5 - Math.random())
   start()
 })
 const pokemonTheme = document.querySelector('.pokemon')
@@ -198,6 +201,7 @@ pokemonTheme.addEventListener('click', () => {
       shuffledCards.push(item.url)
     })
   }
+  shuffledArray = shuffledCards.sort((a, b) => 0.5 - Math.random())
   start()
 })
 const restartButton = document.getElementById('restart')
