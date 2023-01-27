@@ -12,15 +12,19 @@ body {
   margin: 0 auto;
   height: 400px;
   width: 800px;
-  position: relative;
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 h1 {
-  position: absolute;
+  width: 800px;
   height: 200px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  
   font-size: 150px;
   color: olive;
   font-weight: bold;
@@ -107,6 +111,11 @@ padding: 10px;
   color: olive;
   border: 10px solid olive;
   border-radius: 10px;
+}
+.flip {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
 }
 
 #restart {

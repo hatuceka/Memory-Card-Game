@@ -1,4 +1,3 @@
-const play = document.getElementById('play')
 const winningImage = document.getElementById('h1')
 
 const container = document.querySelector('.container')
@@ -183,6 +182,7 @@ squares.forEach((square, index) => {
   square.addEventListener('click', squareClick)
 })
 const sesameTheme = document.querySelector('.sesame')
+console.log(sesameTheme)
 sesameTheme.addEventListener('click', () => {
   userChoice = sesameList
   sesameTheme.disabled = true
