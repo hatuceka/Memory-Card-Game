@@ -1,4 +1,5 @@
 const play = document.getElementById('play')
+const winningImage = document.getElementById('h1')
 
 const container = document.querySelector('.container')
 const squares = document.querySelectorAll('.square')
@@ -126,6 +127,8 @@ const squareClick = (event) => {
       gameSound.pause()
       winningSound.play()
       gameEnd = true
+      winningImage.style.backgroundImage = `url(https://i.pinimg.com/originals/e5/27/9f/e5279f5b58c4d921d8439c253bb15362.gif)`
+      winningImage.style.backgroundSize = 'cover'
       winnerMessage.innerText = 'WELL DONE!'
       winnerMessage.classList.add('blink')
     }
