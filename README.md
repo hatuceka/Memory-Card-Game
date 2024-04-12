@@ -5,8 +5,7 @@
 ## By: Hatice Tuba Yorukoglu
 
 [LinkedIn](https://www.linkedin.com/feed/) |
-[Github](https://github.com/hatuceka) |
-[Instagram](https://instagram.com/iamhaticetuba?igshid=YmMyMTA2M2Y=)
+[Github](https://github.com/hatuceka) 
 
 ---
 
